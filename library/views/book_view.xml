@@ -47,7 +47,7 @@
     </record>
 
     <!--Menus-->
-    <menuitem id="library_menu_root" name="Library" sequence="1"/>
+    <menuitem id="library_menu_root" web_icon="library,static/description/icon.png" name="Library" sequence="1"/>
     <menuitem id="library_book_menu_category" name="Book" sequence="1" parent="library_menu_root"/>
     <menuitem id="action_library_book_menu" name="Book" sequence="1" parent="library_book_menu_category" action="action_library_book"/>
 </odoo>
