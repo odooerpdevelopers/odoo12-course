@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View book, add author_id -->
+        <record id="library_book_form_view_author" model="ir.ui.view">
+            <field name="name">library.book.form.author</field>
+            <field name="model">library.book</field>
+            <field name="inherit_id" ref="library.library_book_form_view"/>
+            <field name="arch" type="xml">
+                <field name="isbn" position="after">
+                    <field name="author_id"/>
+                </field>
+            </field>
+        </record>
+
+        <!--search view book by author-->
+        <record id="library_book_search_view" model="ir.ui.view">
+            <field name="name">library.search.view</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search string="Book Search view">
+                    <field name="name" string="Name"/>
+                    <field name="author_id" string="Author"/>
+                    <field name="isbn" string="ISBN"/>
+                </search>
+            </field>
+        </record>
+
+        <!--Author form view-->
+        <record id="author_form_view" model="ir.ui.view">
+            <field name="name">author.form.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <form string="authorForm">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="country_id"/>
+                            <field name="total_books"/>
+
+                        </group>
+                        <group>
+                            <field name="book_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--author tree view-->
+        <record id="author_tree_view" model="ir.ui.view">
+            <field name="name">author.tree.view</field>
+            <field name="model">library.author</field>
+            <field name="arch" type="xml">
+                <tree decoration-danger="total_books &lt; 1" decoration-info="total_books &gt;= 1">
+                    <field name="name"/>
+                    <field name="total_books"/>
+                    <field name="country_id"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--action author-->
+        <record id="action_author_tree_view" model="ir.actions.act_window">
+            <field name="name">Author</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">library.author</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menus-->
+        <menuitem id="library_author_menu_category" name="Authors" sequence="1" parent="library.library_menu_root"/>
+        <menuitem id="action_library_author_menu" name="Author" sequence="1" parent="library_author_menu_category"
+                  action="action_author_tree_view"/>
+    </data>
+</odoo>
